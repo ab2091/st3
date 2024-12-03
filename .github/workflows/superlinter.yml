@@ -24,9 +24,12 @@ jobs:
           distribution: 'temurin' # OpenJDK distribution
           java-version: '17'      # Adjust to your project's Java version
 
-      # Step 3: Run unit tests using Java (No build tool)
+      # Step 3: Compile the Java code
+      - name: Compile Java files
+        run: |
+          javac -d out LoginApp.java LoginAppTest.java # Compile both Java files
+
+      # Step 4: Run the unit tests
       - name: Run Unit Tests
         run: |
-          # Compile the Java code and run unit tests
-          javac -d out $(find . -name "*.java") # Compile all Java files
-          java -cp out org.junit.runner.JUnitCore TestClassName # Replace with your actual test class name
+          java -cp out org.junit.runner.JUnitCore LoginAppTest # Run the unit tests in LoginAppTest.java
