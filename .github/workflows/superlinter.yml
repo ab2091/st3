@@ -13,9 +13,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # Step 1: Check out the repository
-      - name: Checkout repository
+      # Step 1: Checkout the code from the ab2091-patch-1 branch
+      - name: Checkout code from ab2091-patch-1
         uses: actions/checkout@v3
+        with:
+          ref: ab2091-patch-1 # Check out the code from the ab2091-patch-1 branch
 
       # Step 2: Set up Java JDK
       - name: Set up Java
@@ -24,7 +26,7 @@ jobs:
           distribution: 'temurin' # OpenJDK distribution
           java-version: '17'      # Adjust to your project's Java version
 
-      # Step 3: Compile the Java code
+      # Step 3: Compile the Java files
       - name: Compile Java files
         run: |
           javac -d out LoginApp.java LoginAppTest.java # Compile both Java files
