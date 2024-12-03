@@ -1,0 +1,32 @@
+name: Java Unit Tests Workflow
+
+# Trigger the workflow on pull requests to main or master branches
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  test:
+    # Use a Windows runner
+    runs-on: windows-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java JDK
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # OpenJDK distribution
+          java-version: '17'      # Adjust to your project's Java version
+
+      # Step 3: Run unit tests using Java (No build tool)
+      - name: Run Unit Tests
+        run: |
+          # Compile the Java code and run unit tests
+          javac -d out $(find . -name "*.java") # Compile all Java files
+          java -cp out org.junit.runner.JUnitCore TestClassName # Replace with your actual test class name
